@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Área Restrita • Conteúdo Adulto</title>
+
+  <!-- META PIXEL (APENAS PAGEVIEW) -->
+  <script>
+    !function(f,b,e,v,n,t,s){
+      if(f.fbq)return;n=f.fbq=function(){
+        n.callMethod ? n.callMethod.apply(n,arguments) : n.queue.push(arguments)
+      };
+      if(!f._fbq)f._fbq=n;
+      n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];
+      t=b.createElement(e);t.async=!0;
+      t.src=v;
+      s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)
+    }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+    fbq('init', '3106420649560520');
+    fbq('track', 'PageView');
+  </script>
+  <!-- END PIXEL -->
+
+  <style>
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:radial-gradient(circle at top,#1a1a1a,#0b0b0b);
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:100vh;
+    }
+    .box{
+      max-width:420px;
+      padding:34px 26px;
+      background:#121212;
+      border-radius:18px;
+      text-align:center;
+      box-shadow:0 0 40px rgba(0,0,0,.7);
+    }
+    h1{
+      font-size:24px;
+      margin-bottom:14px;
+      font-weight:700;
+    }
+    p{
+      font-size:15px;
+      line-height:1.5;
+      opacity:.9;
+    }
+    .btn{
+      display:block;
+      width:100%;
+      margin-top:24px;
+      padding:15px;
+      border-radius:14px;
+      background:linear-gradient(135deg,#ff0055,#ff7b00);
+      color:#fff;
+      font-size:16px;
+      font-weight:bold;
+      border:none;
+      cursor:pointer;
+      box-shadow:0 10px 26px rgba(255,0,90,.45);
+      transition:.2s;
+    }
+    .btn:hover{transform:scale(1.04);}
+    .note{
+      margin-top:16px;
+      font-size:12px;
+      opacity:.55;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <h1>Conteúdo Adulto</h1>
+    <p>
+      Esta área contém material destinado exclusivamente
+      a maiores de 18 anos.<br><br>
+      Ao continuar, você confirma que é maior de idade
+      e concorda em acessar conteúdo adulto.
+    </p>
+
+    <button class="btn" id="continueBtn">
+      Sou maior de 18 • Continuar
+    </button>
+
+    <div class="note">
+      Acesso voluntário • conteúdo restrito
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('continueBtn').addEventListener('click', function () {
+      window.location.href = 'https://www.privacy-kamilynha.site/';
+    });
+  </script>
+</body>
+</html>
