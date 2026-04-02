@@ -61,6 +61,7 @@
     </style>
 </head>
 <body>
+   <div class="fake-popup" id="popup"></div>
 
 <div class="card" id="product-card">
     <img id="img" src="" alt="Produto">
@@ -151,88 +152,36 @@ document.getElementById("img").src = p.img;
 document.getElementById("comprar").onclick = () => {
   window.location.href = p.link;
 };
-    </script>
-    <style>
-/* POPUP SOCIAL PROOF */
-.fake-popup {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  background: #0d001a;
-  border: 1px solid rgba(255,0,255,.3);
-  border-radius: 12px;
-  padding: 12px 14px;
-  color: #fff;
-  font-size: 13px;
-  box-shadow: 0 0 15px rgba(255,0,255,.4);
-  z-index: 9999;
-  display: none;
-  max-width: 260px;
-  animation: fadeInUp .5s ease;
-}
-
-.fake-popup strong {
-  color: #ff4df0;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-</style>
-
-<div class="fake-popup" id="popup"></div>
-
-<script>
-// Lista maior de nomes (30+)
 const names = [
-  "Lucas","Mateus","Fernanda","Juliana","Rafael","Bruna","Carlos","Amanda","Felipe","Camila",
-  "Gustavo","Larissa","Thiago","Patricia","Daniel","Isabela","Eduardo","Mariana","Vitor","Ana",
-  "João","Sofia","Gabriel","Beatriz","Leonardo","Carolina","Bruno","Vanessa","Pedro","Laura",
-  "Fernando","Raquel","Murilo","Natália","Alexandre"
+    "Lucas","Mateus","Fernanda","Juliana","Rafael","Bruna","Carlos","Amanda","Felipe","Camila",
+    "Gustavo","Larissa","Thiago","Patricia","Daniel","Isabela","Eduardo","Mariana","Vitor","Ana",
+    "João","Sofia","Gabriel","Beatriz","Leonardo","Carolina","Bruno","Vanessa","Pedro","Laura",
+    "Fernando","Raquel","Murilo","Natália","Alexandre"
 ];
 
-// Função para pegar os produtos do site
-function getProducts() {
-  const elements = document.querySelectorAll('.product-title');
-  return Array.from(elements).map(el => el.innerText);
-}
-
-// Função para gerar tempo aleatório do popup
-function randomTime() {
-  const times = ["agora mesmo", "há 1 minuto", "há 2 minutos", "há 5 minutos"];
-  return times[Math.floor(Math.random() * times.length)];
-}
-
-// Função que mostra o popup
 function showPopup() {
-  const popup = document.getElementById('popup');
-  const products = getProducts();
-  if (products.length === 0) return;
+    const popup = document.getElementById('popup');
+    
+    // Pega um produto aleatório da sua lista de objetos
+    const keys = Object.keys(produtos);
+    const randomKey = keys[Math.floor(Math.random() * keys.length)];
+    const productName = produtos[randomKey].nome;
+    
+    const name = names[Math.floor(Math.random() * names.length)];
+    const times = ["agora mesmo", "há 1 minuto", "há 2 minutos", "há 5 minutos"];
+    const time = times[Math.floor(Math.random() * times.length)];
 
-  const name = names[Math.floor(Math.random() * names.length)];
-  const product = products[Math.floor(Math.random() * products.length)];
-  const time = randomTime();
+    popup.innerHTML = `<strong>${name}</strong> comprou<br>${productName}<br><small>${time}</small>`;
+    popup.style.display = 'block';
 
-  popup.innerHTML = `<strong>${name}</strong> comprou<br>${product}<br><small>${time}</small>`;
-  popup.style.display = 'block';
-
-  // Fecha o popup após 4 segundos
-  setTimeout(() => {
-    popup.style.display = 'none';
-  }, 4000);
+    setTimeout(() => {
+        popup.style.display = 'none';
+    }, 4000);
 }
 
-// Dispara popup a cada 7 segundos
+// Inicia o loop de popups
 setInterval(showPopup, 7000);
 </script>
-
 <div class="benefits">
 
   <div class="benefit-box">
