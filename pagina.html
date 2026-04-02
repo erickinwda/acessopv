@@ -68,7 +68,7 @@
     <h1 id="nome">Carregando...</h1>
     <h2 id="preco">---</h2>
 
-    <div style="width: 100%; margin: 15px 0;">
+  <div style="width: 100%; margin: 15px 0;">
         <div style="position: relative; width: 100%; aspect-ratio: 16 / 9;">
             <iframe
                 src="https://player.cloudinary.com/embed/?cloud_name=daycgvrno&public_id=video2_dffqfl"
@@ -152,35 +152,31 @@ document.getElementById("img").src = p.img;
 document.getElementById("comprar").onclick = () => {
   window.location.href = p.link;
 };
-const names = [
-    "Lucas","Mateus","Fernanda","Juliana","Rafael","Bruna","Carlos","Amanda","Felipe","Camila",
-    "Gustavo","Larissa","Thiago","Patricia","Daniel","Isabela","Eduardo","Mariana","Vitor","Ana",
-    "João","Sofia","Gabriel","Beatriz","Leonardo","Carolina","Bruno","Vanessa","Pedro","Laura",
-    "Fernando","Raquel","Murilo","Natália","Alexandre"
-];
+const names = ["Lucas","Mateus","Fernanda","Juliana","Rafael","Bruna","Carlos","Amanda","Felipe","Camila","Gustavo","Larissa","Thiago","Patricia","Daniel","Isabela","Eduardo","Mariana","Vitor","Ana"];
 
 function showPopup() {
     const popup = document.getElementById('popup');
-    
-    // Pega um produto aleatório da sua lista de objetos
     const keys = Object.keys(produtos);
     const randomKey = keys[Math.floor(Math.random() * keys.length)];
     const productName = produtos[randomKey].nome;
-    
     const name = names[Math.floor(Math.random() * names.length)];
-    const times = ["agora mesmo", "há 1 minuto", "há 2 minutos", "há 5 minutos"];
-    const time = times[Math.floor(Math.random() * times.length)];
-
-    popup.innerHTML = `<strong>${name}</strong> comprou<br>${productName}<br><small>${time}</small>`;
+    
+    // Texto igual ao print: Nome em Rosa, emoji de braço e ícone de compra
+    popup.innerHTML = `<strong>${name}</strong> comprou<br>🛒 ${productName} 💪<br><small>agora mesmo</small>`;
+    
     popup.style.display = 'block';
 
     setTimeout(() => {
         popup.style.display = 'none';
-    }, 4000);
+    }, 4500); // Fica 4.5 segundos na tela
 }
 
-// Inicia o loop de popups
-setInterval(showPopup, 7000);
+// Inicia o popup após 3 segundos e repete a cada 10 segundos
+setTimeout(() => {
+    showPopup();
+    setInterval(showPopup, 10000);
+}, 3000);
+
 </script>
 <div class="benefits">
 
