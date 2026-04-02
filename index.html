@@ -759,18 +759,3 @@ const id = urlParams.get("produto");
   async
   defer
 ></script>
-
-const produto = produtos[id];
-
-if(produto){
-  document.getElementById("img").src = produto.img;
-  document.getElementById("nome").innerText = produto.nome;
-  document.getElementById("preco").innerText = produto.preco;
-
-  document.getElementById("comprar").onclick = () => {
-    window.location.href = produto.link;
-  };
-} else {
-  document.body.innerHTML = "<h1>Produto não encontrado</h1>";
-}
-</script>
