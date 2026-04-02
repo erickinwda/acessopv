@@ -1,0 +1,40 @@
+/* Estilos do Popup */
+#purchase-popup {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 9999;
+    font-family: sans-serif;
+    transform: translateY(150%);
+    transition: transform 0.5s ease-in-out;
+    border-left: 5px solid #2ecc71; /* Cor verde de sucesso */
+}
+#purchase-popup.show {
+    transform: translateY(0);
+}
+.pp-img {
+    width: 50px;
+    height: 50px;
+    background: #eee;
+    border-radius: 5px;
+}
+.pp-text {
+    font-size: 14px;
+    color: #333;
+}
+.pp-text b {
+    color: #000;
+}
+.pp-time {
+    font-size: 11px;
+    color: #999;
+    display: block;
+    margin-top: 3px;
+}

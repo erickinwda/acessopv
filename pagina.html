@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
+
+<style>
+body{
+  background: radial-gradient(circle at 20% 20%, #2a0050, #000);
+  color:#fff;
+  font-family:'Poppins',sans-serif;
+  display:flex;
+  flex-direction:column; /* empilha card + benefícios */
+  align-items:center;
+  padding:20px;
+  margin:0;
+  min-height:100vh; /* deixa crescer a página */
+  justify-content:flex-start; /* evita encolher conteúdo */
+}
+
+.card{
+  background:#0d001a;
+  border-radius:15px;
+  padding:20px;
+  width:100%;
+  max-width:400px; /* aumenta um pouco pra ficar maior no mobile e desktop */
+  box-shadow:0 0 25px rgba(255,0,255,.4);
+  text-align:center;
+  margin-bottom:20px;
+}
+
+.card img{
+  width:100%;
+  border-radius:10px;
+}
+
+.video{
+  width:100%;
+  max-height:220px; /* um pouco maior sem quebrar layout */
+  object-fit:cover;
+  border-radius:10px;
+  margin-top:10px;
+}
+
+h1{font-size:20px;margin:10px 0;color:#ccc} /* leve aumento */
+h2{margin:10px 0;font-size:24px} /* leve aumento */
+
+.btn{
+  width:100%;
+  padding:16px; /* um pouco maior */
+  border:none;
+  border-radius:10px;
+  background:linear-gradient(90deg,#a100ff,#ff00cc);
+  color:#fff;
+  font-weight:600;
+  cursor:pointer;
+  margin-top:15px;
+}
+</style>
+</style>
+
+<title>Finalizar Compra</title>
+</head>
+
+
+<body>
+
+<div class="card">
+  <img id="img">
+
+  <h1 id="nome"></h1>
+  <h2 id="preco"></h2>
+
+<video controls class="video">
+  <source link="https://player.cloudinary.com/embed/?cloud_name=daycgvrno&public_id=video2_dffqfl" type="video/mp4">
+</video>
+  <button class="btn" id="comprar">FINALIZAR COMPRA</button>
+</div>
+
+<script>
+// PEGAR ID
+const params = new URLSearchParams(window.location.search);
+const id = params.get("produto");
+
+// TODOS PRODUTOS
+const produtos = {
+
+1:{nome:"GAMEPASS BUNDLE 🔥",preco:"R$ 19,37",img:"left.png",link:"LINK1"},
+2:{nome:"TRUE BLUE BUNDLE ✨",preco:"R$ 18,62",img:"right.png",link:"LINK2"},
+
+3:{nome:"CONTA LEVEL 1000",preco:"R$ 17,48",img:"skin1.png",link:"LINK3"},
+4:{nome:"CONTA MISTERIOSA 🎁",preco:"R$ 16,73",img:"skin2.png",link:"LINK4"},
+5:{nome:"CESTA MÍTICA",preco:"R$ 15,29",img:"skin3.png",link:"LINK5"},
+6:{nome:"DRAGON/T-REX/KITSUNE",preco:"R$ 14,84",img:"skin4.png",link:"LINK6"},
+7:{nome:"DRAGON/DOUGH/KITSUNE",preco:"R$ 13,57",img:"skin5.png",link:"LINK7"},
+8:{nome:"DRAGON/YETI/KITSUNE",preco:"R$ 12,91",img:"skin6.png",link:"LINK8"},
+9:{nome:"DRAGON/TIGER/KITSUNE",preco:"R$ 11,76",img:"skin7.png",link:"LINK9"},
+
+10:{nome:"DRAGON PERMANENTE",preco:"R$ 19,37",img:"dragon_permanente.png",link:"LINK10"},
+11:{nome:"KITSUNE PERMANENTE",preco:"R$ 18,62",img:"kitsune_permanente.png",link:"LINK11"},
+12:{nome:"CONTROL REWORK",preco:"R$ 16,73",img:"control_rework_permanente.png",link:"LINK12"},
+13:{nome:"DARK BLADE",preco:"R$ 11,76",img:"dark_blade.png",link:"LINK13"},
+14:{nome:"FRUTAS PERMANENTES",preco:"R$ 16,28+",img:"frutas_permanentes.png",link:"LINK14"},
+15:{nome:"GAMEPASS DIRETO",preco:"R$ 15,67+",img:"gamepass_direto_na_conta.png",link:"LINK15"},
+16:{nome:"CAIXA ROBUX",preco:"R$ 14,21",img:"caixa_robux.png",link:"LINK16"},
+
+17:{nome:"V4 ALEATORIA 1 ENG",preco:"R$ 13,88",img:"raça_v4_aleatoria_1.png",link:"LINK17"},
+18:{nome:"V4 FULL + CDK",preco:"R$ 12,36",img:"raça_v4_aleatoria_full.png",link:"LINK18"},
+19:{nome:"ANGEL V4",preco:"R$ 11,54",img:"angel_full_v4.png",link:"LINK19"},
+20:{nome:"MINK V4",preco:"R$ 10,97",img:"mink_full_v4.png",link:"LINK20"},
+21:{nome:"SHARK V4",preco:"R$ 19,81",img:"shark_full_v4.png",link:"LINK21"},
+22:{nome:"GHOUL V4",preco:"R$ 18,03",img:"ghoul_full_v4.png",link:"LINK22"},
+23:{nome:"HUMAN V4",preco:"R$ 17,19",img:"human_full_v4.png",link:"LINK23"},
+24:{nome:"CYBORG V4",preco:"R$ 16,66",img:"cyborg_full_v4.png",link:"LINK24"},
+25:{nome:"ANGEL V4 + CDK",preco:"R$ 15,48",img:"angel_full_v4_cdk.png",link:"LINK25"},
+26:{nome:"SHARK V4 + CDK",preco:"R$ 14,72",img:"shark_full_v4_cdk.png",link:"LINK26"},
+27:{nome:"CYBORG V4 + CDK",preco:"R$ 13,11",img:"cyborg_full_v4_cdk.png",link:"LINK27"},
+28:{nome:"DRACO V4",preco:"R$ 12,64",img:"draco_full_v4.png",link:"LINK28"},
+
+29:{nome:"ANGEL + BOUNTY",preco:"R$ 11,83",img:"angel_full_v4_bounty.png",link:"LINK29"},
+30:{nome:"CONTA BOUNTY",preco:"R$ 10,45",img:"conta_10m_30m_bounty.png",link:"LINK30"},
+31:{nome:"SHARK + BOUNTY",preco:"R$ 19,55",img:"shark_full_v4_bounty.png",link:"LINK31"},
+
+32:{nome:"NOTIFICADOR",preco:"R$ 18,27",img:"notificador_de_fruta.png",link:"LINK32"},
+33:{nome:"3x PERGAMINHO",preco:"R$ 17,74",img:"3x_pergaminhos_miticos.png",link:"LINK33"},
+34:{nome:"DARK BLADE",preco:"R$ 16,39",img:"dark_blade1.png",link:"LINK34"},
+35:{nome:"5x PERGAMINHO",preco:"R$ 15,93",img:"5x_pergaminho.png",link:"LINK35"},
+36:{nome:"2x MAESTRIA",preco:"R$ 14,58",img:"2x_maestria.png",link:"LINK36"},
+37:{nome:"2x MONEY",preco:"R$ 13,26",img:"2x_money.png",link:"LINK37"},
+38:{nome:"+1 STORAGE",preco:"R$ 12,47",img:"1_espaco_armazenamento.png",link:"LINK38"},
+39:{nome:"2x BOSS DROP",preco:"R$ 11,68",img:"2x_boss_drop.png",link:"LINK39"},
+40:{nome:"BARCOS RÁPIDOS",preco:"R$ 9,97",img:"barcos_rapidos.png",link:"LINK40"}
+
+};
+
+// PEGAR PRODUTO
+const p = produtos[id];
+
+// SE NÃO EXISTIR
+if(!p){
+  document.body.innerHTML = "Produto não encontrado";
+}
+
+// MOSTRAR
+document.getElementById("nome").innerText = p.nome;
+document.getElementById("preco").innerText = p.preco;
+document.getElementById("img").src = p.img;
+
+// BOTÃO FINAL
+document.getElementById("comprar").onclick = () => {
+  window.location.href = p.link;
+};
+</script>
+
+<div class="benefits">
+
+  <div class="benefit-box">
+    <div class="icon">📦</div>
+    <h3>Entrega imediata</h3>
+    <p>Receba o seu pacote imediatamente após o pagamento.</p>
+  </div>
+
+  <div class="benefit-box">
+    <div class="icon">🛡️</div>
+    <h3>Segurança total</h3>
+    <p>Seus dados são criptografados de ponta-a-ponta durante todo o processo.</p>
+  </div>
+
+  <div class="benefit-box">
+    <div class="icon">💳</div>
+    <h3>Formas de pagamento</h3>
+    <p>Aceitamos os meios de pagamentos mais populares!</p>
+  </div>
+
+</div>
+
+</body>
+</html>
