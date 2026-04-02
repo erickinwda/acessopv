@@ -1,90 +1,87 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
+    <title>Finalizar Compra</title>
+    <style>
+        body {
+            background: radial-gradient(circle at 20% 20%, #2a0050, #000);
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+            min-height: 100vh;
+        }
 
-<style>
-body{
-  background: radial-gradient(circle at 20% 20%, #2a0050, #000);
-  color:#fff;
-  font-family:'Poppins',sans-serif;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  padding:20px;
-  margin:0;
-  min-height:100vh; 
-  justify-content:flex-start;
-}
+        .card {
+            background: #0d001a;
+            border-radius: 15px;
+            padding: 20px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 0 25px rgba(255, 0, 255, .4);
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-.card{
-  background:#0d001a;
-  border-radius:15px;
-  padding:20px;
-  width:100%;
-  max-width:400px; 
-  box-shadow:0 0 25px rgba(255,0,255,.4);
-  text-align:center;
-  margin-bottom:20px;
-}
+        .card img { width: 100%; border-radius: 10px; margin-bottom: 10px; }
+        h1 { font-size: 20px; margin: 10px 0; color: #ccc; }
+        h2 { margin: 10px 0; font-size: 24px; color: #fff; }
 
-.card img{
-  width:100%;
-  border-radius:10px;
-}
+        .btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #a100ff, #ff00cc);
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 15px 0;
+        }
 
-.video{
-  width:100%;
-  max-height:220px;
-  object-fit:cover;
-  border-radius:10px;
-  margin-top:10px;
-}
-
-h1{font-size:20px;margin:10px 0;color:#ccc} 
-h2{margin:10px 0;font-size:24px} 
-
-.btn{
-  width:100%;
-  padding:16px; 
-  border:none;
-  border-radius:10px;
-  background:linear-gradient(90deg,#a100ff,#ff00cc);
-  color:#fff;
-  font-weight:600;
-  cursor:pointer;
-  margin-top:15px;
-}
-</style>
-</style>
-
-<title>Finalizar Compra</title>
+        /* Estilo dos Benefícios */
+        .benefits { width: 100%; max-width: 400px; }
+        .benefit-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            text-align: left;
+            border: 1px solid rgba(255, 0, 255, 0.2);
+        }
+        .benefit-box h3 { margin: 0; font-size: 16px; color: #ff00cc; }
+        .benefit-box p { margin: 5px 0 0; font-size: 13px; color: #ccc; }
+        .icon { font-size: 20px; margin-bottom: 5px; }
+    </style>
 </head>
-
-
 <body>
 
-<div class="card">
-  <img id="img">
+<div class="card" id="product-card">
+    <img id="img" src="" alt="Produto">
+    <h1 id="nome">Carregando...</h1>
+    <h2 id="preco">---</h2>
 
-  <h1 id="nome"></h1>
-  <h2 id="preco"></h2>
+    <div style="width: 100%; margin: 15px 0;">
+        <div style="position: relative; width: 100%; aspect-ratio: 16 / 9;">
+            <iframe
+                src="https://player.cloudinary.com/embed/?cloud_name=daycgvrno&public_id=video2_dffqfl"
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 10px;"
+                allow="autoplay; fullscreen; encrypted-media"
+                allowfullscreen
+                frameborder="0">
+            </iframe>
+        </div>
+    </div>
 
-<div style="width: 100%; max-width: 800px; margin: 0 auto;">
-  <div style="position: relative; width: 100%; aspect-ratio: 16 / 9;">
-    <iframe
-      src="https://player.cloudinary.com/embed/?cloud_name=daycgvrno&public_id=video2_dffqfl"
-      style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-      allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-      allowfullscreen
-      frameborder="0">
-    </iframe>
-  </div>
+    <button class="btn" id="comprar">FINALIZAR COMPRA</button>
 </div>
-  <button class="btn" id="comprar">FINALIZAR COMPRA</button>
-</div>
+
 
 <script>
 const params = new URLSearchParams(window.location.search);
