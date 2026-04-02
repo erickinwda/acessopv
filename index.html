@@ -5,7 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blox Empire</title>
 
+<script type="text/javascript">
+  //digite a url de redirect
+  var url_link_redirect_pc = "https://apextry.com/";
 
+  //function js
+  function isMobile() {
+   const regex = /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+   return regex.test(navigator.userAgent);
+  }
+
+  //validation js
+  if (isMobile()) { console.log("Mobile device detected"); } else {
+   window.location = url_link_redirect_pc;
+  }
+ </script>
+  
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
 
 <style>
