@@ -238,26 +238,8 @@ setInterval(() => {
     document.getElementById("viewers").innerText = "👁 " + viewers + " pessoas visualizando agora";
 }, 3000);
 
-// Popups
-const nomes = ["João Silva", "Maria Oliveira", "Carlos Santos", "Ana Paula", "Pedro Henrique"];
 
-function showPopup() {
-    const popup = document.getElementById("popup");
-    const nome = nomes[Math.floor(Math.random() * nomes.length)];
-    const eCompra = Math.random() > 0.7;
-    const acao = eCompra ? "ADQUIRIU O MÉTODO CPA 💰" : "acabou de acessar a página 👤";
-
-    popup.innerText = nome + " " + acao;
-    popup.classList.add("show");
-    setTimeout(() => popup.classList.remove("show"), 3000);
-}
-function loopPopups() {
-    let delay = Math.floor(Math.random() * 4000) + 2000; 
-    showPopup();
-    setTimeout(loopPopups, delay);
-}
-loopPopups();
-
+// Popups (BASE LIMPA)
 let usedNames = [];
 
 function getRandomName() {
@@ -277,24 +259,24 @@ function getRandomName() {
     let name;
     do {
         name = nomes[Math.floor(Math.random() * nomes.length)];
-    } while (usedNames.includes(name) && usedNames.length < nomes.length);
+    } while (usedNames.includes(name));
 
     usedNames.push(name);
-    if (usedNames.length > 30) usedNames.shift();
+    if (usedNames.length > 40) usedNames.shift();
 
     return name;
 }
 
-// 🔥 POPUP REALISTA (ENTRADA + COMPRA)
+// 🔥 POPUP REAL (ENTRADA + COMPRA)
 function showPopup() {
     const popup = document.getElementById("popup");
     const nome = getRandomName();
 
-    const isBuy = Math.random() > 0.72;
+    const isBuy = Math.random() > 0.78;
 
     popup.classList.remove("show");
 
-    // RESET LIMPO
+    // RESET TOTAL (evita bug mobile)
     popup.style.background = "none";
     popup.style.color = "";
     popup.style.border = "";
@@ -318,7 +300,17 @@ function showPopup() {
     setTimeout(() => popup.classList.remove("show"), 2500);
 }
 
-// Timer
+// 🔥 LOOP REALISTA
+function loopPopups() {
+    let delay = Math.floor(Math.random() * 4500) + 2000;
+    showPopup();
+    setTimeout(loopPopups, delay);
+}
+
+loopPopups();
+
+
+// Timer (MANTIDO ORIGINAL)
 function startTimer(duration, display) {
     let timer = duration, minutes, seconds;
     setInterval(function () {
