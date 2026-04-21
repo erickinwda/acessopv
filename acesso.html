@@ -248,54 +248,61 @@ requestAnimationFrame(animate);
 }
 animate();
 
-// contador dinâmico leve
 let viewers = 1129;
-
 setInterval(() => {
-  let change = Math.floor(Math.random()*5);
-  viewers += Math.random()>0.5 ? change : -change;
-  if(viewers < 1100) viewers = 1100;
-
-  document.getElementById("viewers").innerText =
-    "👁 " + viewers + " pessoas visualizando agora";
+    let change = Math.floor(Math.random() * 5);
+    viewers += Math.random() > 0.5 ? change : -change;
+    if (viewers < 1100) viewers = 1100;
+    const viewersEl = document.getElementById("viewers");
+    if (viewersEl) viewersEl.innerText = "👁 " + viewers + " pessoas visualizando agora";
 }, 3000);
 
-// LISTA AMPLIADA DE NOMES
+// LISTA EXTENSA DE NOMES (MAIS DE 40 VARIAÇÕES)
 const nomes = ["João Silva", "Maria Oliveira", "Carlos Santos", "Ana Paula", "Pedro Henrique", "Lucas Souza", "Marcos V.", "Juliana Costa", "Rafael M.", "Fernanda Lima", "Gustavo B.", "Beatriz R.", "Rodrigo S.", "Aline M.", "Thiago F.", "Camila G.", "Bruno D.", "Letícia K.", "Gabriel H.", "Vanessa L.", "Ricardo P.", "Sabrina J.", "Douglas T.", "Monica S.", "Renato F.", "Priscila C.", "Felipe A.", "Tatiane N.", "Diego R.", "Larissa W.", "Hugo S.", "Patrícia B.", "André L.", "Daniele M.", "Vitor G.", "Jéssica O.", "Samuel R.", "Isabela K.", "Mateus P.", "Eduarda F."];
 
+// FUNÇÃO PARA MOSTRAR O POPUP
 function showPopup() {
     const popup = document.getElementById("popup");
+    if (!popup) return;
+
     const nome = nomes[Math.floor(Math.random() * nomes.length)];
     
-    // Sorteia se a pessoa "Acessou" ou "Adquiriu" (30% de chance de ter adquirido)
-    const acao = Math.random() > 0.7 ? "ADQUIRIU O MÉTODO CPA 💰" : "acabou de acessar a página 👤";
+    // Define a probabilidade: 70% acesso / 30% adquiriu
+    const eCompra = Math.random() > 0.7;
+    const acao = eCompra ? "ADQUIRIU O MÉTODO CPA 💰" : "acabou de acessar a página 👤";
     
-    // Se adquiriu, muda a cor do popup temporariamente para verde/dourado
-    if (acao.includes("ADQUIRIU")) {
+    // Ajuste visual dinâmico
+    if (eCompra) {
         popup.style.background = "linear-gradient(135deg, #28a745, #d4af37)";
         popup.style.color = "#fff";
+        popup.style.border = "2px solid gold";
     } else {
         popup.style.background = "linear-gradient(135deg, #00ffcc, #00ccff)";
         popup.style.color = "#000";
+        popup.style.border = "none";
     }
 
     popup.innerText = nome + " " + acao;
     popup.classList.add("show");
 
+    // Tempo que o popup fica visível (3 segundos)
     setTimeout(() => {
         popup.classList.remove("show");
     }, 3000);
 }
 
-// Inicia os popups com tempos variados (entre 3 e 8 segundos) para parecer real
+// LOOP INFINITO DE POPUPS COM TEMPOS VARIADOS (CORRIGIDO)
 function loopPopups() {
-    let delay Aleatorio = Math.floor(Math.random() * 5000) + 3000;
+    // O erro estava aqui: 'delay Aleatorio' com espaço impedia o código de rodar
+    let delayAleatorio = Math.floor(Math.random() * 4000) + 2000; 
     showPopup();
     setTimeout(loopPopups, delayAleatorio);
 }
+
+// INICIA O LOOP
 loopPopups();
 
-// TIMER DO BOTÃO E ESCASSEZ
+// TIMER DO BOTÃO E CONTROLE DE EXIBIÇÃO
 function startTimer(duration, display) {
     let timer = duration, minutes, seconds;
     setInterval(function () {
@@ -303,18 +310,17 @@ function startTimer(duration, display) {
         seconds = parseInt(timer % 60, 10);
         minutes = minutes < 10 ? "0" + minutes : minutes;
         seconds = seconds < 10 ? "0" + seconds : seconds;
-        display.textContent = minutes + ":" + seconds;
+        if (display) display.textContent = minutes + ":" + seconds;
         if (--timer < 0) timer = 0;
     }, 1000);
 }
 
-// Delay para o botão aparecer (ajustado para 5 seg)
+// Aparece o botão após 5 segundos
 setTimeout(() => {
     const cta = document.getElementById("ctaBtn");
-    cta.style.display = "block";
-    startTimer(60 * 5, document.getElementById("timer"));
+    const timerDisplay = document.getElementById("timer");
+    if (cta) {
+        cta.style.display = "block";
+        startTimer(60 * 5, timerDisplay);
+    }
 }, 5000);
-</script>
-
-</body>
-</html>
