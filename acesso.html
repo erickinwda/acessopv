@@ -260,6 +260,11 @@ function animate(){
   requestAnimationFrame(animate);
 }
 animate();
+  document.querySelectorAll(".faq-q").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    btn.parentElement.classList.toggle("active");
+  });
+});
 
 // Contador viewers
 let viewers = 1129;
