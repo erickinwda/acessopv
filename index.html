@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verificação de Segurança</title>
+
+<link href="https://googleapis.com" rel="stylesheet">
+
+<style>
+body {
+  margin:0;
+  background: radial-gradient(circle at top, #0b0b0b, #000000 70%);
+  color:#fff;
+  font-family:'Inter';
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.loader-box {
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.02);
+  padding: 30px;
+  border-radius: 15px;
+  border: 1px solid rgba(255, 215, 0, 0.1);
+}
+
+h1 {
+  font-family: 'Orbitron';
+  color: gold;
+  font-size: 16px;
+  letter-spacing: 2px;
+  margin-bottom: 25px;
+  text-transform: uppercase;
+}
+
+/* Container da barra */
+.progress-container {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+
+.progress-bar {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(135deg, gold, #f5d77a);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+  transition: width 0.3s ease;
+}
+
+.status-text {
+  font-family: 'Inter';
+  color: #00ffcc;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.icon-verify {
+  font-size: 40px;
+  margin-bottom: 15px;
+  display: block;
+}
+</style>
+</head>
+<body>
+
+<div class="loader-box">
+    <span class="icon-verify">🛡️</span>
+    <h1 id="title">VERIFICAÇÃO DE SEGURANÇA</h1>
+    
+    <div class="progress-container">
+        <div class="progress-bar" id="bar"></div>
+    </div>
+
+    <div class="status-text" id="status">INICIANDO PROTOCOLO...</div>
+</div>
+
+<script>
+    const bar = document.getElementById('bar');
+    const statusTxt = document.getElementById('status');
+    const title = document.getElementById('title');
+
+    // Mensagens de verificação humana e técnica
+    const passos = [
+     
+        { p: 60, t: "VALIDANDO SE VOCÊ É HUMANO...", title: "VERIFICAÇÃO HUMANA" },
+        { p: 85, t: "ACESSO AO MÉTODO CPA AUTORIZADO!", title: "SUCESSO" },
+        { p: 100, t: "CARREGANDO CONTEÚDO...", title: "REDIRECIONANDO" }
+    ];
+
+    let i = 0;
+
+    function animar() {
+        if (i < passos.length) {
+            bar.style.width = passos[i].p + "%";
+            statusTxt.innerText = passos[i].t;
+            title.innerText = passos[i].title;
+            
+            // O tempo é aleatório para parecer uma análise de verdade
+            let tempo = Math.random() * 900 + 600; 
+            i++;
+            
+            if (i === passos.length) {
+                setTimeout(() => {
+                    window.location.href = "acesso.html";
+                }, 1000);
+            } else {
+                setTimeout(animar, tempo);
+            }
+        }
+    }
+
+    window.onload = () => setTimeout(animar, 500);
+</script>
+
+</body>
+</html>
