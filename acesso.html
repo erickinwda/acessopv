@@ -225,7 +225,7 @@ video {
 
 <a href="https://seguropagamentos.com.br/metodo-oficial-bau" style="text-decoration: none;">
     <button id="ctaBtn" class="btn" style="display:none;">
-    🔓 ACESSAR AGORA (<span id="timer"></span>)
+    🔓 ACESSAR AGORA </span>)
     </button>
 </a>
 <div style="margin-top:20px; text-align:left;">
@@ -330,46 +330,6 @@ function loopPopups() {
 }
 loopPopups();
 
-// Timer do Botão (CORRIGIDO COM HORAS)
-function startTimer(duration, display) {
-    let parts = duration.split(":");
-
-    let hours = 0, minutes = 0, seconds = 0;
-
-    if (parts.length === 3) {
-        hours = parseInt(parts[0], 10);
-        minutes = parseInt(parts[1], 10);
-        seconds = parseInt(parts[2], 10);
-    } else if (parts.length === 2) {
-        minutes = parseInt(parts[0], 10);
-        seconds = parseInt(parts[1], 10);
-    } else {
-        seconds = parseInt(parts[0], 10);
-    }
-
-    let timer = (hours * 3600) + (minutes * 60) + seconds;
-
-    setInterval(function () {
-        let h = Math.floor(timer / 3600);
-        let m = Math.floor((timer % 3600) / 60);
-        let s = timer % 60;
-
-        h = h < 10 ? "0" + h : h;
-        m = m < 10 ? "0" + m : m;
-        s = s < 10 ? "0" + s : s;
-
-        display.textContent = h + ":" + m + ":" + s;
-
-        if (--timer < 0) timer = 0;
-    }, 1000);
-}
-
-// Exibe botão após 5 seg
-setTimeout(() => {
-    const cta = document.getElementById("ctaBtn");
-    cta.style.display = "block";
-    startTimer(60 * 5, document.getElementById("timer"));
-}, 5000);
 
 </script>
 
