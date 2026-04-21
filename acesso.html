@@ -258,31 +258,64 @@ function loopPopups() {
 }
 loopPopups();
 
-// 🔥 FUNÇÃO CORRIGIDA DE POPUP (AZUL / DOURADO ESTÁVEL)
+let usedNames = [];
+
+function getRandomName() {
+    const nomes = [
+        "João Silva","Maria Oliveira","Carlos Santos","Ana Paula","Pedro Henrique",
+        "Lucas Souza","Marcos Vinícius","Juliana Costa","Rafael Martins","Fernanda Lima",
+        "Gustavo Borges","Beatriz Rocha","Rodrigo Santos","Aline Moraes","Thiago Ferreira",
+        "Camila Gomes","Bruno Dias","Letícia Klein","Gabriel Henrique","Vanessa Lopes",
+        "Ricardo Pereira","Sabrina Alves","Douglas Torres","Monica Souza","Renato Farias",
+        "Priscila Costa","Felipe Andrade","Tatiane Nunes","Diego Ribeiro","Larissa Weber",
+        "Hugo Silva","Patrícia Barros","André Lima","Daniele Moura","Vitor Gomes",
+        "Jéssica Oliveira","Samuel Rodrigues","Isabela Klein","Mateus Pereira","Eduarda Faria",
+        "Henrique Alves","Bianca Souza","Leonardo Martins","Clara Rocha","Arthur Lima",
+        "Natália Santos","Caio Ferreira","Isadora Mendes","Bruna Costa","Felipe Silva"
+    ];
+
+    let name;
+    do {
+        name = nomes[Math.floor(Math.random() * nomes.length)];
+    } while (usedNames.includes(name) && usedNames.length < nomes.length);
+
+    usedNames.push(name);
+    if (usedNames.length > 30) usedNames.shift();
+
+    return name;
+}
+
+// 🔥 POPUP REALISTA (ENTRADA + COMPRA)
 function showPopup() {
     const popup = document.getElementById("popup");
-    const nome = nomes[Math.floor(Math.random() * nomes.length)];
-    const eCompra = Math.random() > 0.7;
-    const acao = eCompra ? "ADQUIRIU O MÉTODO CPA 💰" : "acabou de acessar a página 👤";
+    const nome = getRandomName();
 
-    // RESET TOTAL (resolve bug de cor no Android/iPhone)
+    const isBuy = Math.random() > 0.72;
+
+    popup.classList.remove("show");
+
+    // RESET LIMPO
     popup.style.background = "none";
     popup.style.color = "";
     popup.style.border = "";
+    popup.style.padding = "10px 14px";
+    popup.style.fontSize = "12px";
+    popup.style.minWidth = "200px";
+    popup.style.borderRadius = "10px";
 
-    if (eCompra) {
-        popup.style.background = "linear-gradient(135deg, #b8860b, #ffd700)";
+    if (isBuy) {
+        popup.style.background = "linear-gradient(135deg, #d4af37, #ffd700)";
         popup.style.color = "#000";
         popup.style.border = "1px solid #ffd700";
+        popup.innerText = `${nome} acabou de comprar 💰`;
     } else {
-        popup.style.background = "linear-gradient(135deg, #00c6ff, #0072ff)";
+        popup.style.background = "linear-gradient(135deg, #2ea8ff, #0077ff)";
         popup.style.color = "#fff";
-        popup.style.border = "none";
+        popup.innerText = `${nome} entrou no sistema 👤`;
     }
 
-    popup.innerText = nome + " " + acao;
     popup.classList.add("show");
-    setTimeout(() => popup.classList.remove("show"), 3000);
+    setTimeout(() => popup.classList.remove("show"), 2500);
 }
 
 // Timer
@@ -291,9 +324,12 @@ function startTimer(duration, display) {
     setInterval(function () {
         minutes = parseInt(timer / 60, 10);
         seconds = parseInt(timer % 60, 10);
+
         minutes = minutes < 10 ? "0" + minutes : minutes;
         seconds = seconds < 10 ? "0" + seconds : seconds;
+
         display.textContent = minutes + ":" + seconds;
+
         if (--timer < 0) timer = 0;
     }, 1000);
 }
@@ -304,7 +340,3 @@ setTimeout(() => {
     cta.style.display = "block";
     startTimer(60 * 5, document.getElementById("timer"));
 }, 5000);
-</script>
-
-</body>
-</html>
