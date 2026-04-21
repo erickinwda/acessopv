@@ -229,6 +229,15 @@ video {
     </button>
 </a>
 <div style="margin-top:20px; text-align:left;">
+  <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const cta = document.getElementById("ctaBtn");
+
+    if (cta) {
+        cta.style.display = "block";
+    }
+});
+</script>
 
 <h3 style="color:gold; text-align:center;">❓ Perguntas frequentes</h3>
 
@@ -329,21 +338,6 @@ function loopPopups() {
     setTimeout(loopPopups, delay);
 }
 loopPopups();
- 
-  // Exibe botão após 5 seg
-setTimeout(() => {
-    const cta = document.getElementById("ctaBtn");
-    const timerEl = document.getElementById("timer");
-
-    if (!cta || !timerEl) return;
-
-    cta.style.display = "block";
-
-    // evita quebra: usa valor fixo do HTML
-    startTimer(timerEl.textContent, timerEl);
-
-}, 5000);
-
 
 </script>
 
