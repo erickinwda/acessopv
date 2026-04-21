@@ -2,14 +2,23 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Acesso ao Sistema</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Inter&display=swap" rel="stylesheet">
 
 <style>
+/* Bloqueio de rolagem lateral e fixação de viewport */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden; /* Impede a tela de sair com o dedo para os lados */
+  position: relative;
+  background: #000;
+}
+
 body {
-  margin:0;
   background: radial-gradient(circle at top, #0b0b0b, #000000 70%);
   color:#fff;
   font-family:'Inter';
@@ -32,36 +41,49 @@ canvas {
   background:rgba(255,255,255,0.02);
   border-radius:15px;
   box-shadow:0 0 40px rgba(255,215,0,0.05);
+  box-sizing: border-box;
 }
 
 h1 {
   font-family:'Orbitron';
   color:gold;
-  font-size:26px;
+  font-size:24px;
 }
 
-p { color:#ccc; font-size:15px; }
+p { color:#ccc; font-size:15px; line-height: 1.6; }
 
+/* Estilo para evitar tela cinza no vídeo */
 video {
   width:100%;
   border-radius:12px;
   margin-top:20px;
+  background-color: #000; /* Fundo preto enquanto carrega */
+  display: block;
 }
 
-/* botão */
 .btn {
   width:100%;
   background:linear-gradient(135deg,gold,#f5d77a);
-  padding:15px;
-  font-size:17px;
+  padding:18px;
+  font-size:16px;
   border:none;
   border-radius:10px;
   margin-top:15px;
   font-weight:bold;
   cursor:pointer;
+  color: #000;
+  text-transform: uppercase;
+  transition: transform 0.2s;
 }
 
-.btn:active { transform:scale(0.97); }
+.btn:active { transform:scale(0.95); }
+
+/* Botão de escassez vermelho */
+#ctaBtn {
+  background: linear-gradient(135deg, #ff0000, #b30000);
+  color: #fff;
+  box-shadow: 0 0 20px rgba(255,0,0,0.3);
+}
 
 .divider {
   height:1px;
@@ -69,7 +91,6 @@ video {
   margin:30px 0;
 }
 
-/* GRID */
 .grid {
   display:grid;
   grid-template-columns:repeat(2,1fr);
@@ -82,7 +103,6 @@ video {
   border-radius:8px;
 }
 
-/* popup */
 .popup {
   position:fixed;
   bottom:20px;
@@ -97,7 +117,6 @@ video {
   opacity:0;
   transform:translateY(40px);
   transition:all 0.4s ease;
-  box-shadow:0 0 20px rgba(0,255,200,0.8);
 }
 
 .popup.show {
