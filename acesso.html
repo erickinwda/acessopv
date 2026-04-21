@@ -251,13 +251,39 @@ function showPopup() {
     popup.classList.add("show");
     setTimeout(() => popup.classList.remove("show"), 3000);
 }
-
 function loopPopups() {
     let delay = Math.floor(Math.random() * 4000) + 2000; 
     showPopup();
     setTimeout(loopPopups, delay);
 }
 loopPopups();
+
+// 🔥 FUNÇÃO CORRIGIDA DE POPUP (AZUL / DOURADO ESTÁVEL)
+function showPopup() {
+    const popup = document.getElementById("popup");
+    const nome = nomes[Math.floor(Math.random() * nomes.length)];
+    const eCompra = Math.random() > 0.7;
+    const acao = eCompra ? "ADQUIRIU O MÉTODO CPA 💰" : "acabou de acessar a página 👤";
+
+    // RESET TOTAL (resolve bug de cor no Android/iPhone)
+    popup.style.background = "none";
+    popup.style.color = "";
+    popup.style.border = "";
+
+    if (eCompra) {
+        popup.style.background = "linear-gradient(135deg, #b8860b, #ffd700)";
+        popup.style.color = "#000";
+        popup.style.border = "1px solid #ffd700";
+    } else {
+        popup.style.background = "linear-gradient(135deg, #00c6ff, #0072ff)";
+        popup.style.color = "#fff";
+        popup.style.border = "none";
+    }
+
+    popup.innerText = nome + " " + acao;
+    popup.classList.add("show");
+    setTimeout(() => popup.classList.remove("show"), 3000);
+}
 
 // Timer
 function startTimer(duration, display) {
