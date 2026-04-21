@@ -8,7 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Inter&display=swap" rel="stylesheet">
 
 <style>
-/* Bloqueio de rolagem lateral e fixação de viewport */
 html, body {
   margin: 0;
   padding: 0;
@@ -77,7 +76,6 @@ video {
 
 .btn:active { transform:scale(0.95); }
 
-/* Botão de escassez vermelho */
 #ctaBtn {
   background: linear-gradient(135deg, #ff0000, #b30000);
   color: #fff;
@@ -141,7 +139,7 @@ video {
 
 <a href="#video1" style="text-decoration: none;"><button class="btn">▶ VER COMO FUNCIONA</button></a>
 
-<video id="video1" controls playsinline style="width:100%; border-radius:12px; margin-top:20px;">
+<video id="video1" controls playsinline webkit-playsinline preload="metadata">
     <source src="https://res.cloudinary.com/dc1ubolya/video/upload/q_auto/f_auto/v1776749709/IMG_0707_j5wbdb.mp4" type="video/mp4">
 </video>
 
@@ -164,7 +162,7 @@ video {
 
 <p>Um sistema digital que permite acessar diferentes oportunidades dentro de plataformas online.</p>
 
-<video controls playsinline style="width:100%; border-radius:12px; margin-top:20px;">
+<video controls playsinline webkit-playsinline preload="metadata" style="width:100%; border-radius:12px; margin-top:20px;">
     <source src="https://res.cloudinary.com/dc1ubolya/video/upload/q_auto/f_auto/v1776749711/bau_pwzgok.mp4" type="video/mp4">
 </video>
 
@@ -183,7 +181,7 @@ video {
 
 <div class="divider"></div>
 
-<video controls playsinline style="width:100%; border-radius:12px; margin-top:20px;">
+<video controls playsinline webkit-playsinline preload="metadata" style="width:100%; border-radius:12px; margin-top:20px;">
 <source src="https://res.cloudinary.com/dc1ubolya/video/upload/q_auto/f_auto/v1776749709/IMG_2768_tsdz2d.mp4" type="video/mp4">
 </video>
 
@@ -199,6 +197,27 @@ video {
 <div class="popup" id="popup"></div>
 
 <script>
+// 🔊 FIX ANDROID AUDIO UNLOCK (NÃO MEXER NO RESTO)
+
+function unlockAudio() {
+    const videos = document.querySelectorAll("video");
+
+    videos.forEach(v => {
+        v.setAttribute("playsinline", "");
+        v.setAttribute("webkit-playsinline", "");
+        v.load();
+
+        const playPromise = v.play();
+        if (playPromise !== undefined) {
+            playPromise.catch(() => {});
+        }
+    });
+}
+
+document.addEventListener("touchstart", unlockAudio, { once: true });
+document.addEventListener("click", unlockAudio, { once: true });
+
+
 // Partículas
 const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
@@ -230,24 +249,14 @@ setInterval(() => {
     document.getElementById("viewers").innerText = "👁 " + viewers + " pessoas visualizando agora";
 }, 3000);
 
-// Sistema de Popups (Nomes e Vendas)
-const nomes = ["João Silva", "Maria Oliveira", "Carlos Santos", "Ana Paula", "Pedro Henrique", "Lucas Souza", "Marcos V.", "Juliana Costa", "Rafael M.", "Fernanda Lima", "Gustavo B.", "Beatriz R.", "Rodrigo S.", "Aline M.", "Thiago F.", "Camila G.", "Bruno D.", "Letícia K.", "Gabriel H.", "Vanessa L.", "Ricardo P.", "Sabrina J.", "Douglas T.", "Monica S.", "Renato F.", "Priscila C.", "Felipe A.", "Tatiane N.", "Diego R.", "Larissa W.", "Hugo S.", "Patrícia B.", "André L.", "Daniele M.", "Vitor G.", "Jéssica O.", "Samuel R.", "Isabela K.", "Mateus P.", "Eduarda F."];
+// Popups
+const nomes = ["João Silva", "Maria Oliveira", "Carlos Santos", "Ana Paula", "Pedro Henrique"];
 
 function showPopup() {
     const popup = document.getElementById("popup");
     const nome = nomes[Math.floor(Math.random() * nomes.length)];
     const eCompra = Math.random() > 0.7;
     const acao = eCompra ? "ADQUIRIU O MÉTODO CPA 💰" : "acabou de acessar a página 👤";
-    
-    if (eCompra) {
-        popup.style.background = "linear-gradient(135deg, #28a745, #d4af37)";
-        popup.style.color = "#fff";
-        popup.style.border = "1px solid gold";
-    } else {
-        popup.style.background = "linear-gradient(135deg, #00ffcc, #00ccff)";
-        popup.style.color = "#000";
-        popup.style.border = "none";
-    }
 
     popup.innerText = nome + " " + acao;
     popup.classList.add("show");
@@ -261,7 +270,7 @@ function loopPopups() {
 }
 loopPopups();
 
-// Timer do Botão
+// Timer
 function startTimer(duration, display) {
     let timer = duration, minutes, seconds;
     setInterval(function () {
@@ -274,7 +283,6 @@ function startTimer(duration, display) {
     }, 1000);
 }
 
-// Exibe botão após 5 seg
 setTimeout(() => {
     const cta = document.getElementById("ctaBtn");
     cta.style.display = "block";
