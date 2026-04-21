@@ -1,1 +1,305 @@
-<!DOCTYPE html> <html lang="pt-BR"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> <title>Acesso ao Sistema</title> <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Inter&display=swap" rel="stylesheet"> <style> /* Bloqueio de rolagem lateral e fixação de viewport */ html, body { margin: 0; padding: 0; width: 100%; overflow-x: hidden; position: relative; background: #000; } body { background: radial-gradient(circle at top, #0b0b0b, #000000 70%); color:#fff; font-family:'Inter'; text-align:center; } canvas { position:fixed; top:0; left:0; z-index:0; } .container { position:relative; z-index:1; padding:20px; max-width:420px; margin:auto; background:rgba(255,255,255,0.02); border-radius:15px; box-shadow:0 0 40px rgba(255,215,0,0.05); box-sizing: border-box; } h1 { font-family:'Orbitron'; color:gold; font-size:24px; } p { color:#ccc; font-size:15px; line-height: 1.6; } video { width:100%; border-radius:12px; margin-top:20px; background-color: #000; display: block; } .btn { width:100%; background:linear-gradient(135deg,gold,#f5d77a); padding:18px; font-size:16px; border:none; border-radius:10px; margin-top:15px; font-weight:bold; cursor:pointer; color: #000; text-transform: uppercase; transition: transform 0.2s; } .btn:active { transform:scale(0.95); } /* Botão de escassez vermelho */ #ctaBtn { background: linear-gradient(135deg, #ff0000, #b30000); color: #fff; box-shadow: 0 0 20px rgba(255,0,0,0.3); } .divider { height:1px; background:linear-gradient(to right, transparent, gold, transparent); margin:30px 0; } .grid { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-top:20px; } .grid img { width:100%; border-radius:8px; } .popup { position:fixed; bottom:20px; left:20px; padding:12px 16px; border-radius:12px; font-size:14px; font-weight:bold; z-index:9999; opacity:0; transform:translateY(40px); transition:all 0.4s ease; min-width: 250px; text-align: left; } .popup.show { opacity:1; transform:translateY(0); } </style> </head> <body> <canvas id="particles"></canvas> <div class="container"> <h1>ACESSO AO SISTEMA</h1> <p>Enquanto a maioria nem sabe que isso existe… algumas pessoas já estão explorando esse sistema digital.</p> <p id="viewers" style="color:#00ffcc;"> 👁 1129 pessoas visualizando agora </p> <a href="#video1" style="text-decoration: none;"><button class="btn">▶ VER COMO FUNCIONA</button></a> <video id="video1" controls playsinline style="width:100%; border-radius:12px; margin-top:20px;"> <source src="https://res.cloudinary.com/dc1ubolya/video/upload/q_auto/f_auto/v1776749709/IMG_0707_j5wbdb.mp4" type="video/mp4"> </video> <p>Veja como isso está sendo utilizado na prática...</p> <div class="divider"></div> <h3 style="color:gold;">Você vai aprender:</h3> <p> ✔ Como começar do zero<br> ✔ Como utilizar o sistema passo a passo<br> ✔ Como aplicar estratégias simples<br> ✔ Usando celular ou computador </p> <div class="divider"></div> <h3 style="color:gold;">Como funciona?</h3> <p>Um sistema digital que permite acessar diferentes oportunidades dentro de plataformas online.</p> <video controls playsinline style="width:100%; border-radius:12px; margin-top:20px;"> <source src="https://res.cloudinary.com/dc1ubolya/video/upload/q_auto/f_auto/v1776749711/bau_pwzgok.mp4" type="video/mp4"> </video> <a href="#provas" style="text-decoration: none;"><button class="btn">📊 VER RESULTADOS</button></a> <div class="divider"></div> <div id="provas" class="grid"> <img src="photo_2026-03-28_17-40-52.jpg"> <img src="photo_2026-03-17_10-43-29.jpg"> <img src="photo_2026-02-02_01-43-16.jpg"> <img src="photo_2026-02-02_01-41-21.jpg"> </div> <p style="color:#00ffcc;">Resultados compartilhados por usuários</p> <div class="divider"></div> <video controls playsinline style="width:100%; border-radius:12px; margin-top:20px;"> <source src="https://res.cloudinary.com/dc1ubolya/video/upload/q_auto/f_auto/v1776749709/IMG_2768_tsdz2d.mp4" type="video/mp4"> </video> <p style="color:red; font-weight: bold;">⚠️ O SISTEMA SAIRÁ DO AR EM:</p> <a href="https://seguropagamentos.com.br/metodo-oficial-bau" style="text-decoration: none;"> <button id="ctaBtn" class="btn" style="display:none;"> 🔓 ACESSAR AGORA (<span id="timer">05:00</span>) </button> </a> </div> <div class="popup" id="popup"></div> <script> // Partículas const canvas = document.getElementById("particles"); const ctx = canvas.getContext("2d"); canvas.width = window.innerWidth; canvas.height = window.innerHeight; let particles = []; for (let i = 0; i < 150; i++) { particles.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, size: Math.random()*2 + 1, speed: Math.random()*0.5 + 0.2}); } function animate(){ ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p=>{ p.y -= p.speed; if(p.y < 0) p.y = canvas.height; ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI*2); ctx.fillStyle = "rgba(255,215,0,0.6)"; ctx.fill(); }); requestAnimationFrame(animate); } animate(); // Contador viewers let viewers = 1129; setInterval(() => { viewers += Math.floor(Math.random() * 10) - 5; if (viewers < 1100) viewers = 1100; document.getElementById("viewers").innerText = "👁 " + viewers + " pessoas visualizando agora"; }, 3000); // Sistema de Popups (Nomes e Vendas) const nomes = ["João Silva", "Maria Oliveira", "Carlos Santos", "Ana Paula", "Pedro Henrique", "Lucas Souza", "Marcos V.", "Juliana Costa", "Rafael M.", "Fernanda Lima", "Gustavo B.", "Beatriz R.", "Rodrigo S.", "Aline M.", "Thiago F.", "Camila G.", "Bruno D.", "Letícia K.", "Gabriel H.", "Vanessa L.", "Ricardo P.", "Sabrina J.", "Douglas T.", "Monica S.", "Renato F.", "Priscila C.", "Felipe A.", "Tatiane N.", "Diego R.", "Larissa W.", "Hugo S.", "Patrícia B.", "André L.", "Daniele M.", "Vitor G.", "Jéssica O.", "Samuel R.", "Isabela K.", "Mateus P.", "Eduarda F."]; function showPopup() { const popup = document.getElementById("popup"); const nome = nomes[Math.floor(Math.random() * nomes.length)]; const eCompra = Math.random() > 0.7; const acao = eCompra ? "ADQUIRIU O MÉTODO CPA 💰" : "acabou de acessar a página 👤"; if (eCompra) { popup.style.background = "linear-gradient(135deg, #28a745, #d4af37)"; popup.style.color = "#fff"; popup.style.border = "1px solid gold"; } else { popup.style.background = "linear-gradient(135deg, #00ffcc, #00ccff)"; popup.style.color = "#000"; popup.style.border = "none"; } popup.innerText = nome + " " + acao; popup.classList.add("show"); setTimeout(() => popup.classList.remove("show"), 3000); } function loopPopups() { let delay = Math.floor(Math.random() * 4000) + 2000; showPopup(); setTimeout(loopPopups, delay); } loopPopups(); // Timer do Botão function startTimer(duration, display) { let timer = duration, minutes, seconds; setInterval(function () { minutes = parseInt(timer / 60, 10); seconds = parseInt(timer % 60, 10); minutes = minutes < 10 ? "0" + minutes : minutes; seconds = seconds < 10 ? "0" + seconds : seconds; display.textContent = minutes + ":" + seconds; if (--timer < 0) timer = 0; }, 1000); } // Exibe botão após 5 seg setTimeout(() => { const cta = document.getElementById("ctaBtn"); cta.style.display = "block"; startTimer(60 * 5, document.getElementById("timer")); }, 5000); </script> </body> </html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Acesso ao Sistema</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Inter&display=swap" rel="stylesheet">
+
+<style>
+/* Bloqueio de rolagem lateral e fixação de viewport */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden; 
+  position: relative;
+  background: #000;
+}
+
+body {
+  background: radial-gradient(circle at top, #0b0b0b, #000000 70%);
+  color:#fff;
+  font-family:'Inter';
+  text-align:center;
+}
+
+canvas {
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:0;
+}
+
+.container {
+  position:relative;
+  z-index:1;
+  padding:20px;
+  max-width:420px;
+  margin:auto;
+  background:rgba(255,255,255,0.02);
+  border-radius:15px;
+  box-shadow:0 0 40px rgba(255,215,0,0.05);
+  box-sizing: border-box;
+}
+
+h1 {
+  font-family:'Orbitron';
+  color:gold;
+  font-size:24px;
+}
+
+p { color:#ccc; font-size:15px; line-height: 1.6; }
+
+video {
+  width:100%;
+  border-radius:12px;
+  margin-top:20px;
+  background-color: #000;
+  display: block;
+}
+
+.btn {
+  width:100%;
+  background:linear-gradient(135deg,gold,#f5d77a);
+  padding:18px;
+  font-size:16px;
+  border:none;
+  border-radius:10px;
+  margin-top:15px;
+  font-weight:bold;
+  cursor:pointer;
+  color: #000;
+  text-transform: uppercase;
+  transition: transform 0.2s;
+}
+
+.btn:active { transform:scale(0.95); }
+
+#ctaBtn {
+  background: linear-gradient(135deg, #ff0000, #b30000);
+  color: #fff;
+  box-shadow: 0 0 20px rgba(255,0,0,0.3);
+}
+
+.divider {
+  height:1px;
+  background:linear-gradient(to right, transparent, gold, transparent);
+  margin:30px 0;
+}
+
+.grid {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  margin-top:20px;
+}
+
+.grid img {
+  width:100%;
+  border-radius:8px;
+}
+
+.popup {
+  position:fixed;
+  bottom:20px;
+  left:20px;
+  padding:12px 16px;
+  border-radius:12px;
+  font-size:14px;
+  font-weight:bold;
+  z-index:9999;
+  opacity:0;
+  transform:translateY(40px);
+  transition:all 0.4s ease;
+  min-width: 250px;
+  text-align: left;
+}
+
+.popup.show {
+  opacity:1;
+  transform:translateY(0);
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="particles"></canvas>
+
+<div class="container">
+
+<h1>ACESSO AO SISTEMA</h1>
+
+<p>Enquanto a maioria nem sabe que isso existe… algumas pessoas já estão explorando esse sistema digital.</p>
+
+<p id="viewers" style="color:#00ffcc;">
+👁 1129 pessoas visualizando agora
+</p>
+
+<a href="#video1" style="text-decoration: none;"><button class="btn">▶ VER COMO FUNCIONA</button></a>
+
+<video id="video1" controls playsinline>
+    <source src="https://res.cloudinary.com/dc1ubolya/video/upload/q_auto/f_auto/v1776749709/IMG_0707_j5wbdb.mp4" type="video/mp4">
+</video>
+
+<p>Veja como isso está sendo utilizado na prática...</p>
+
+<div class="divider"></div>
+
+<h3 style="color:gold;">Você vai aprender:</h3>
+
+<p>
+✔ Como começar do zero<br>
+✔ Como utilizar o sistema passo a passo<br>
+✔ Como aplicar estratégias simples<br>
+✔ Usando celular ou computador
+</p>
+
+<div class="divider"></div>
+
+<h3 style="color:gold;">Como funciona?</h3>
+
+<p>Um sistema digital que permite acessar diferentes oportunidades dentro de plataformas online.</p>
+
+<video controls playsinline>
+    <source src="https://res.cloudinary.com/dc1ubolya/video/upload/q_auto/f_auto/v1776749711/bau_pwzgok.mp4" type="video/mp4">
+</video>
+
+<a href="#provas" style="text-decoration: none;"><button class="btn">📊 VER RESULTADOS</button></a>
+
+<div class="divider"></div>
+
+<div id="provas" class="grid">
+<img src="photo_2026-03-28_17-40-52.jpg">
+<img src="photo_2026-03-17_10-43-29.jpg">
+<img src="photo_2026-02-02_01-43-16.jpg">
+<img src="photo_2026-02-02_01-41-21.jpg">
+</div>
+
+<p style="color:#00ffcc;">Resultados compartilhados por usuários</p>
+
+<div class="divider"></div>
+
+<video controls playsinline>
+<source src="https://res.cloudinary.com/dc1ubolya/video/upload/q_auto/f_auto/v1776749709/IMG_2768_tsdz2d.mp4" type="video/mp4">
+</video>
+
+<p style="color:red; font-weight: bold;">⚠️ O SISTEMA SAIRÁ DO AR EM:</p>
+
+<a href="https://seguropagamentos.com.br/metodo-oficial-bau" style="text-decoration: none;">
+    <button id="ctaBtn" class="btn" style="display:none;">
+    🔓 ACESSAR AGORA (<span id="timer">05:00</span>)
+    </button>
+</a>
+
+</div>
+
+<div class="popup" id="popup"></div>
+
+<script>
+// Partículas
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+for (let i = 0; i < 150; i++) {
+  particles.push({
+    x: Math.random()*canvas.width,
+    y: Math.random()*canvas.height,
+    size: Math.random()*2 + 1,
+    speed: Math.random()*0.5 + 0.2
+  });
+}
+
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p=>{
+    p.y -= p.speed;
+    if(p.y < 0) p.y = canvas.height;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+    ctx.fillStyle = "rgba(255,215,0,0.6)";
+    ctx.fill();
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+
+let viewers = 1129;
+setInterval(() => {
+    viewers += Math.floor(Math.random() * 10) - 5;
+    if (viewers < 1100) viewers = 1100;
+    document.getElementById("viewers").innerText =
+    "👁 " + viewers + " pessoas visualizando agora";
+}, 3000);
+
+// Popups
+const nomes = ["João Silva","Maria Oliveira","Carlos Santos","Ana Paula","Pedro Henrique"];
+
+function showPopup() {
+    const popup = document.getElementById("popup");
+    const nome = nomes[Math.floor(Math.random() * nomes.length)];
+    const eCompra = Math.random() > 0.7;
+    const acao = eCompra ? "ADQUIRIU O MÉTODO CPA 💰" : "acabou de acessar a página 👤";
+
+    popup.innerText = nome + " " + acao;
+    popup.classList.add("show");
+    setTimeout(() => popup.classList.remove("show"), 3000);
+}
+
+function loopPopups() {
+    let delay = Math.floor(Math.random() * 4000) + 2000;
+    showPopup();
+    setTimeout(loopPopups, delay);
+}
+loopPopups();
+
+// Timer
+function startTimer(duration, display) {
+    let timer = duration, minutes, seconds;
+    setInterval(function () {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds;
+
+        if (--timer < 0) timer = 0;
+    }, 1000);
+}
+
+setTimeout(() => {
+    const cta = document.getElementById("ctaBtn");
+    cta.style.display = "block";
+    startTimer(60 * 5, document.getElementById("timer"));
+}, 5000);
+
+/* 🔊 FIX FINAL DE ÁUDIO MOBILE (ANDROID + IOS) */
+function fixAudio() {
+  const videos = document.querySelectorAll("video");
+
+  videos.forEach(v => {
+    v.muted = false;
+    v.defaultMuted = false;
+    v.volume = 1.0;
+    v.removeAttribute("muted");
+
+    try {
+      v.load();
+    } catch(e) {}
+  });
+}
+
+document.addEventListener("click", fixAudio, { once: true });
+document.addEventListener("touchstart", fixAudio, { once: true });
+
+</script>
+
+</body>
+</html>
