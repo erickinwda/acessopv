@@ -260,26 +260,59 @@ setInterval(() => {
     "👁 " + viewers + " pessoas visualizando agora";
 }, 3000);
 
-// popup neutro
-const nomes = ["João","Maria","Carlos","Ana","Pedro","Lucas","Marcos","Juliana","Rafael","Fernanda"];
+// LISTA AMPLIADA DE NOMES
+const nomes = ["João Silva", "Maria Oliveira", "Carlos Santos", "Ana Paula", "Pedro Henrique", "Lucas Souza", "Marcos V.", "Juliana Costa", "Rafael M.", "Fernanda Lima", "Gustavo B.", "Beatriz R.", "Rodrigo S.", "Aline M.", "Thiago F.", "Camila G.", "Bruno D.", "Letícia K.", "Gabriel H.", "Vanessa L.", "Ricardo P.", "Sabrina J.", "Douglas T.", "Monica S.", "Renato F.", "Priscila C.", "Felipe A.", "Tatiane N.", "Diego R.", "Larissa W.", "Hugo S.", "Patrícia B.", "André L.", "Daniele M.", "Vitor G.", "Jéssica O.", "Samuel R.", "Isabela K.", "Mateus P.", "Eduarda F."];
 
-function showPopup(){
-const popup = document.getElementById("popup");
-const nome = nomes[Math.floor(Math.random()*nomes.length)];
+function showPopup() {
+    const popup = document.getElementById("popup");
+    const nome = nomes[Math.floor(Math.random() * nomes.length)];
+    
+    // Sorteia se a pessoa "Acessou" ou "Adquiriu" (30% de chance de ter adquirido)
+    const acao = Math.random() > 0.7 ? "ADQUIRIU O MÉTODO CPA 💰" : "acabou de acessar a página 👤";
+    
+    // Se adquiriu, muda a cor do popup temporariamente para verde/dourado
+    if (acao.includes("ADQUIRIU")) {
+        popup.style.background = "linear-gradient(135deg, #28a745, #d4af37)";
+        popup.style.color = "#fff";
+    } else {
+        popup.style.background = "linear-gradient(135deg, #00ffcc, #00ccff)";
+        popup.style.color = "#000";
+    }
 
-popup.innerText = "👤 "+nome+" acessou a página";
-popup.classList.add("show");
+    popup.innerText = nome + " " + acao;
+    popup.classList.add("show");
 
-setTimeout(()=>{
-popup.classList.remove("show");
-},3000);
+    setTimeout(() => {
+        popup.classList.remove("show");
+    }, 3000);
 }
 
-setInterval(showPopup,6000);
+// Inicia os popups com tempos variados (entre 3 e 8 segundos) para parecer real
+function loopPopups() {
+    let delay Aleatorio = Math.floor(Math.random() * 5000) + 3000;
+    showPopup();
+    setTimeout(loopPopups, delayAleatorio);
+}
+loopPopups();
 
-// delay botão
+// TIMER DO BOTÃO E ESCASSEZ
+function startTimer(duration, display) {
+    let timer = duration, minutes, seconds;
+    setInterval(function () {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+        display.textContent = minutes + ":" + seconds;
+        if (--timer < 0) timer = 0;
+    }, 1000);
+}
+
+// Delay para o botão aparecer (ajustado para 5 seg)
 setTimeout(() => {
-  document.getElementById("ctaBtn").style.display = "block";
+    const cta = document.getElementById("ctaBtn");
+    cta.style.display = "block";
+    startTimer(60 * 5, document.getElementById("timer"));
 }, 5000);
 </script>
 
