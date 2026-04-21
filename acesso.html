@@ -13,7 +13,7 @@ html, body {
   margin: 0;
   padding: 0;
   width: 100%;
-  overflow-x: hidden; 
+  overflow-x: hidden;
   position: relative;
   background: #000;
 }
@@ -50,7 +50,11 @@ h1 {
   font-size:24px;
 }
 
-p { color:#ccc; font-size:15px; line-height: 1.6; }
+p {
+  color:#ccc;
+  font-size:15px;
+  line-height: 1.6;
+}
 
 video {
   width:100%;
@@ -207,6 +211,7 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let particles = [];
+
 for (let i = 0; i < 150; i++) {
   particles.push({
     x: Math.random()*canvas.width,
@@ -238,79 +243,38 @@ setInterval(() => {
     document.getElementById("viewers").innerText = "👁 " + viewers + " pessoas visualizando agora";
 }, 3000);
 
+// Popups
+const nomes = ["João Silva", "Maria Oliveira", "Carlos Santos", "Ana Paula", "Pedro Henrique", "Lucas Souza", "Marcos V.", "Juliana Costa", "Rafael M.", "Fernanda Lima", "Gustavo B.", "Beatriz R.", "Rodrigo S.", "Aline M.", "Thiago F.", "Camila G.", "Bruno D.", "Letícia K.", "Gabriel H.", "Vanessa L.", "Ricardo P.", "Sabrina J.", "Douglas T.", "Monica S.", "Renato F.", "Priscila C.", "Felipe A.", "Tatiane N.", "Diego R.", "Larissa W.", "Hugo S.", "Patrícia B.", "André L.", "Daniele M.", "Vitor G.", "Jéssica O.", "Samuel R.", "Isabela K.", "Mateus P.", "Eduarda F."];
 
-// Popups (BASE LIMPA)
-let usedNames = [];
-
-function getRandomName() {
-    const nomes = [
-        "João Silva","Maria Oliveira","Carlos Santos","Ana Paula","Pedro Henrique",
-        "Lucas Souza","Marcos Vinícius","Juliana Costa","Rafael Martins","Fernanda Lima",
-        "Gustavo Borges","Beatriz Rocha","Rodrigo Santos","Aline Moraes","Thiago Ferreira",
-        "Camila Gomes","Bruno Dias","Letícia Klein","Gabriel Henrique","Vanessa Lopes",
-        "Ricardo Pereira","Sabrina Alves","Douglas Torres","Monica Souza","Renato Farias",
-        "Priscila Costa","Felipe Andrade","Tatiane Nunes","Diego Ribeiro","Larissa Weber",
-        "Hugo Silva","Patrícia Barros","André Lima","Daniele Moura","Vitor Gomes",
-        "Jéssica Oliveira","Samuel Rodrigues","Isabela Klein","Mateus Pereira","Eduarda Faria",
-        "Henrique Alves","Bianca Souza","Leonardo Martins","Clara Rocha","Arthur Lima",
-        "Natália Santos","Caio Ferreira","Isadora Mendes","Bruna Costa","Felipe Silva"
-    ];
-
-    let name;
-    do {
-        name = nomes[Math.floor(Math.random() * nomes.length)];
-    } while (usedNames.includes(name));
-
-    usedNames.push(name);
-    if (usedNames.length > 40) usedNames.shift();
-
-    return name;
-}
-
-// 🔥 POPUP REAL (ENTRADA + COMPRA)
 function showPopup() {
     const popup = document.getElementById("popup");
-    const nome = getRandomName();
+    const nome = nomes[Math.floor(Math.random() * nomes.length)];
+    const eCompra = Math.random() > 0.7;
+    const acao = eCompra ? "ADQUIRIU O MÉTODO CPA 💰" : "acabou de acessar a página 👤";
 
-    const isBuy = Math.random() > 0.78;
-
-    popup.classList.remove("show");
-
-    // RESET TOTAL (evita bug mobile)
-    popup.style.background = "none";
-    popup.style.color = "";
-    popup.style.border = "";
-    popup.style.padding = "10px 14px";
-    popup.style.fontSize = "12px";
-    popup.style.minWidth = "200px";
-    popup.style.borderRadius = "10px";
-
-    if (isBuy) {
-        popup.style.background = "linear-gradient(135deg, #d4af37, #ffd700)";
-        popup.style.color = "#000";
-        popup.style.border = "1px solid #ffd700";
-        popup.innerText = `${nome} acabou de comprar 💰`;
-    } else {
-        popup.style.background = "linear-gradient(135deg, #2ea8ff, #0077ff)";
+    if (eCompra) {
+        popup.style.background = "linear-gradient(135deg, #28a745, #d4af37)";
         popup.style.color = "#fff";
-        popup.innerText = `${nome} entrou no sistema 👤`;
+        popup.style.border = "1px solid gold";
+    } else {
+        popup.style.background = "linear-gradient(135deg, #00ffcc, #00ccff)";
+        popup.style.color = "#000";
+        popup.style.border = "none";
     }
 
+    popup.innerText = nome + " " + acao;
     popup.classList.add("show");
-    setTimeout(() => popup.classList.remove("show"), 2500);
+    setTimeout(() => popup.classList.remove("show"), 3000);
 }
 
-// 🔥 LOOP REALISTA
 function loopPopups() {
-    let delay = Math.floor(Math.random() * 4500) + 2000;
+    let delay = Math.floor(Math.random() * 4000) + 2000;
     showPopup();
     setTimeout(loopPopups, delay);
 }
-
 loopPopups();
 
-
-// Timer (MANTIDO ORIGINAL)
+// Timer do Botão
 function startTimer(duration, display) {
     let timer = duration, minutes, seconds;
     setInterval(function () {
@@ -326,9 +290,14 @@ function startTimer(duration, display) {
     }, 1000);
 }
 
-// Botão aparece após 5s
+// Exibe botão após 5 seg
 setTimeout(() => {
     const cta = document.getElementById("ctaBtn");
     cta.style.display = "block";
     startTimer(60 * 5, document.getElementById("timer"));
 }, 5000);
+
+</script>
+
+</body>
+</html>
